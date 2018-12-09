@@ -1,11 +1,14 @@
 %p#notice= notice
 
 %p
-  %b Limit:
-  = @merchant_category_code.limit
+  %b Name:
+  = @merchant_category_code.name
 %p
   %b Code:
-  = @merchant_category_code.code
+  = @merchant_category_code.code 
+%p
+  %b Limit:
+  = @merchant_category_code.limit
 
 = link_to 'Edit', edit_admin_merchant_category_code_path(@merchant_category_code)
 \|

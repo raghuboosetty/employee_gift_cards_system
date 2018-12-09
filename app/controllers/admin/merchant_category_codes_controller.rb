@@ -69,6 +69,6 @@ class Admin::MerchantCategoryCodesController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def merchant_category_code_params
-      params.require(:merchant_category_code).permit(:limit, :code)
+      params.require(:merchant_category_code).permit(:name, :limit, :code)
     end
 end

@@ -69,6 +69,6 @@ class Admin::CardTypesController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_type_params
-      params.fetch(:card_type, {}).permit(:name)
+      params.fetch(:card_type, {}).permit(:name, merchant_category_code_ids: [])
     end
 end

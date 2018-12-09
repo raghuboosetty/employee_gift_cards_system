@@ -1,5 +1,6 @@
 class CardType < ApplicationRecord
   has_many :cards
+  has_and_belongs_to_many :merchant_category_codes
 end
 
 # == Schema Information

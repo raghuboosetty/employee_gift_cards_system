@@ -8,6 +8,10 @@
   .form-group
     = f.label :name, class: 'required'
     = f.text_field :name, class: 'form-control'
-
+  .form-group
+    - MerchantCategoryCode.all.each do |mcc|
+      = check_box_tag "card_type[merchant_category_code_ids][]", mcc.id
+      = label_tag mcc.code, mcc.code
+      %br
   .actions
     = f.submit 'Save', class: 'btn btn-primary'

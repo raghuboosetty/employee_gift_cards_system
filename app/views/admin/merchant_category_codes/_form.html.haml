@@ -6,6 +6,9 @@
         - @merchant_category_code.errors.full_messages.each do |message|
           %li= message
   .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control'          
+  .form-group
     = f.label :limit
     = f.text_field :limit, class: 'form-control'
   .form-group

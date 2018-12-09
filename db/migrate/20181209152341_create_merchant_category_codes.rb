@@ -1,8 +1,9 @@
-class CreateAdminMerchantCategoryCodes < ActiveRecord::Migration[5.2]
+class CreateMerchantCategoryCodes < ActiveRecord::Migration[5.2]
   def change
     create_table :merchant_category_codes do |t|
-      t.integer :limit, limit: 6
+      t.string :name
       t.string :code, limit: 3
+      t.integer :limit, limit: 6
 
       t.timestamps
     end

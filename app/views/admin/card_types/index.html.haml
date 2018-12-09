@@ -4,12 +4,16 @@
   %thead
     %tr
       %th Name
+      %th MCC
+      %th Monthly Limit Overall            
       %th Actions
 
   %tbody
     - @card_types.each do |card_type|
       %tr
         %td= card_type.name
+        %td= card_type.merchant_category_codes.pluck(:code).join(', ')
+        %td= card_type.merchant_category_codes.pluck(:limit).sum
         %td
           = link_to 'Show', [:admin, card_type]
           |
