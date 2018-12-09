@@ -1,0 +1,22 @@
+%h3 Listing Card Types
+
+%table.table.table-sm.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Actions
+
+  %tbody
+    - @card_types.each do |card_type|
+      %tr
+        %td= card_type.name
+        %td
+          = link_to 'Show', [:admin, card_type]
+          |
+          = link_to 'Edit', edit_admin_card_type_path(card_type)
+          |
+          = link_to 'Destroy', [:admin, card_type], method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Card type', new_admin_card_type_path
