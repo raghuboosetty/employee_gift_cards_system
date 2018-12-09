@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Limit:
+  = @merchant_category_code.limit
+%p
+  %b Code:
+  = @merchant_category_code.code
+
+= link_to 'Edit', edit_admin_merchant_category_code_path(@merchant_category_code)
+\|
+= link_to 'Back', admin_merchant_category_codes_path

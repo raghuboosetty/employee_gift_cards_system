@@ -1,0 +1,23 @@
+%h3 Listing MCC
+
+%table.table.table-sm.table-hover
+  %thead
+    %tr
+      %th Limit
+      %th Code
+      %th
+      %th
+      %th
+
+  %tbody
+    - @merchant_category_codes.each do |merchant_category_code|
+      %tr
+        %td= merchant_category_code.limit
+        %td= merchant_category_code.code
+        %td= link_to 'Show', [:admin, merchant_category_code]
+        %td= link_to 'Edit', edit_admin_merchant_category_code_path(merchant_category_code)
+        %td= link_to 'Destroy', [:admin, merchant_category_code], method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New MCC', new_admin_merchant_category_code_path
