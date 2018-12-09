@@ -6,3 +6,24 @@ class Employee < ApplicationRecord
 
   has_many :cards
 end
+
+# == Schema Information
+#
+# Table name: employees
+#
+#  id                     :integer          not null, primary key
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  employee_id            :string(20)
+#  mobile_number          :integer
+#
+# Indexes
+#
+#  index_employees_on_email                 (email) UNIQUE
+#  index_employees_on_reset_password_token  (reset_password_token) UNIQUE
+#
