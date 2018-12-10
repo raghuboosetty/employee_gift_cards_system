@@ -1,5 +1,8 @@
 class MerchantCategoryCode < ApplicationRecord
-  has_and_belongs_to_many :card_types
+  has_and_belongs_to_many :card_types, -> { distinct }
+
+  validates :name, :code, presence: true
+  validates :code, uniqueness: true
 end
 
 # == Schema Information

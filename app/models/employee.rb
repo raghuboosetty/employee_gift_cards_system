@@ -4,7 +4,10 @@ class Employee < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable
 
-  has_many :cards
+  has_many :cards, dependent: :nullify
+
+  validates :employee_id, presence: true, uniqueness: true
+  validates :mobile_number, uniqueness: true
 end
 
 # == Schema Information
@@ -20,6 +23,7 @@ end
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  employee_id            :string(20)
+#  name                   :string
 #  mobile_number          :integer
 #
 # Indexes

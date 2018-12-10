@@ -28,3 +28,16 @@ zeal_card.merchant_category_codes << MerchantCategoryCode.where(code: 'FDG')
 zinger_card = CardType.where(name: 'ZINGER').first
 zinger_card.merchant_category_codes << MerchantCategoryCode.all
 
+[
+  { email: 'employee_1@zaggle.com', password: 'password', password_confirmation: 'password', employee_id: 'ABZ2718', mobile_number: '8452323520' },
+  { email: 'employee_2@zaggle.com', password: 'password', password_confirmation: 'password',  employee_id: 'ABZ3118', mobile_number: '7353534043' }
+].each do |employee|
+  Employee.create(employee)
+end
+
+[
+  { card_number: 5098876554322123, card_type_id: zeal_card.id, employee_id: Employee.first.id },
+  { card_number: 5098876554322100, card_type_id: zinger_card.id, employee_id: Employee.second.id }
+].each do |card|
+  Card.create(card)
+end

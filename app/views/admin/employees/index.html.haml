@@ -4,6 +4,7 @@
   %thead
     %tr
       %th Employee ID
+      %th Email
       %th Mobile Number
       %th Cards
       %th Actions
@@ -12,6 +13,7 @@
     - @employees.each do |employee|
       %tr
         %td= employee.employee_id
+        %td= employee.email
         %td= employee.mobile_number
         %td= employee.cards.pluck(:card_number).join(', ')
         %td

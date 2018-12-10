@@ -1,6 +1,8 @@
 class Card < ApplicationRecord
   belongs_to :card_type
   belongs_to :employee, optional: true
+
+  validates :card_number, presence: true, uniqueness: true
 end
 
 # == Schema Information
