@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  
+  mount GrapeSwaggerRails::Engine, at: "/docs/"
+  mount ApplicationApi => "/"
+
   devise_for :admins, path: 'admin'
   devise_for :employees
   
