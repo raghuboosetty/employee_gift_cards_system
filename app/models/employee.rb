@@ -5,6 +5,7 @@ class Employee < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :cards, dependent: :nullify
+  has_many :transactions
 
   validates :employee_id, presence: true, uniqueness: true
   validates :mobile_number, uniqueness: true

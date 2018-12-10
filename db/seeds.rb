@@ -41,3 +41,15 @@ end
 ].each do |card|
   Card.create(card)
 end
+
+cards = Card.first(2)
+employees = Employee.first(2)
+merchant_category_codes = MerchantCategoryCode.pluck(:code, :id).to_h
+[
+  { employee_id: employees[0].id, card_id: cards[0].id, merchant_category_code_id: merchant_category_codes['FDG'], transaction_id: SecureRandom.alphanumeric(30), merchant_name: 'Swiggy', amount: 187.0, status: 'Success' },
+  { employee_id: employees[0].id, card_id: cards[0].id, merchant_category_code_id: merchant_category_codes['MED'], transaction_id: SecureRandom.alphanumeric(30), merchant_name: 'Apollo', amount: 105.0, status: 'Denied' },
+  { employee_id: employees[1].id, card_id: cards[1].id, merchant_category_code_id: merchant_category_codes['MED'], transaction_id: SecureRandom.alphanumeric(30), merchant_name: 'Swiggy', amount: 1005.0, status: 'Success' },
+  { employee_id: employees[1].id, card_id: cards[1].id, merchant_category_code_id: merchant_category_codes['MED'], transaction_id: SecureRandom.alphanumeric(30), merchant_name: 'Apollo', amount: 1200.0, status: 'Success' }
+].each do |transaction|
+  Transaction.create(transaction)
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_09_160123) do
+ActiveRecord::Schema.define(version: 2018_12_10_054751) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -68,6 +68,21 @@ ActiveRecord::Schema.define(version: 2018_12_09_160123) do
     t.integer "limit", limit: 6
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "employee_id"
+    t.integer "card_id"
+    t.integer "merchant_category_code_id"
+    t.string "transaction_id"
+    t.string "merchant_name"
+    t.decimal "amount"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_transactions_on_card_id"
+    t.index ["employee_id"], name: "index_transactions_on_employee_id"
+    t.index ["merchant_category_code_id"], name: "index_transactions_on_merchant_category_code_id"
   end
 
 end

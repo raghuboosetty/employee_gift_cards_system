@@ -1,0 +1,25 @@
+%p#notice= notice
+
+%p
+  %b Transaction ID
+  = @transaction.transaction_id
+%p
+  %b Employee ID 
+  = @transaction.employee.employee_id
+%p
+  %b Card Number 
+  = @transaction.card.card_number
+%p
+  %b MCC
+  = @transaction.merchant_category_code.code
+%p
+  %b Merchant Name
+  = @transaction.merchant_name
+%p
+  %b Amount
+  = @transaction.amount
+%p
+  %b Status
+  = @transaction.status  
+
+= link_to 'Back', admin_transactions_path

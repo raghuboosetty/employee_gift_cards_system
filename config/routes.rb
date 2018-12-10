@@ -7,11 +7,13 @@ Rails.application.routes.draw do
     resources :cards
     resources :merchant_category_codes
     resources :employees
+    resources :transactions, only: [:index, :show, :destroy]
     
     root to: "card_types#index"
   end
 
-  resources :employees, only: :show
+  resource :employee, only: :show
+  resources :transactions, only: [:index, :show]
   
   root to: "home#show"
 end

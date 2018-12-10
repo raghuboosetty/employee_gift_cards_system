@@ -1,0 +1,29 @@
+%h3 My Transactions
+
+%table.table.table-sm.table-hover.table-striped.table-striped
+  %thead
+    %tr
+      %th Transaction ID
+      %th Employee
+      %th Card Type
+      %th Card
+      %th MCC
+      %th Merchant Name
+      %th Amount
+      %th Status
+      %th Transaction Time
+      %th Actions
+
+  %tbody
+    - @transactions.each do |transaction|
+      %tr
+        %td= transaction.transaction_id
+        %td= transaction.employee.employee_id
+        %td= transaction.card.card_type.name
+        %td= transaction.card.card_number
+        %td= transaction.merchant_category_code.code
+        %td= transaction.merchant_name
+        %td= transaction.amount
+        %td= transaction.status
+        %td= transaction.created_at.strftime("%d %b %Y %H:%M:%S")
+        %td= link_to 'Show', transaction

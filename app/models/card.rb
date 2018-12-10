@@ -1,4 +1,5 @@
 class Card < ApplicationRecord
+  has_many :transactions
   belongs_to :card_type
   belongs_to :employee, optional: true
 
