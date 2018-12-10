@@ -8,7 +8,6 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    %p.notice= notice
-    %p.alert= alert
-    .container
-      = yield
+    %nav.navbar.navbar-expand-sm.bg-light.navbar-light
+      %a.navbar-brand{:href => "#"} Zaggle
+    = yield

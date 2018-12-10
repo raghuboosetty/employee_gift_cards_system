@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  = @employee.email
+%p
+  = @employee.employee_id
+%p
+  = @employee.mobile_number
+%p
+  = @employee.cards.pluck(:card_number).join(', ')
+
+= link_to 'Update Password', edit_employee_password_path
