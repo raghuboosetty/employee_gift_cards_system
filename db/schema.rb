@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2018_12_09_160123) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "employee_id", limit: 20
+    t.string "name"
     t.integer "mobile_number", limit: 12
     t.index ["email"], name: "index_employees_on_email", unique: true
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true

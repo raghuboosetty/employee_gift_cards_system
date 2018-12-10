@@ -1,6 +1,10 @@
 %p#notice= notice
 
+%p
+  = @card.card_number
+  = @card.card_type.name
+  = @card.employee.try(:employee_id)
 
-= link_to 'Edit', edit_card_path(@card)
+= link_to 'Edit', edit_admin_card_path(@card)
 \|
-= link_to 'Back', cards_path
+= link_to 'Back', admin_cards_path

@@ -1,19 +1,26 @@
-%h1 Listing cards
+%h3 Listing cards
 
-%table
+%table.table.table-sm.table-hover
   %thead
     %tr
-      %th
-      %th
-      %th
+      %th Card Number
+      %th Card Type
+      %th Employee
+      %th Actions
 
   %tbody
     - @cards.each do |card|
       %tr
-        %td= link_to 'Show', card
-        %td= link_to 'Edit', edit_card_path(card)
-        %td= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= card.card_number
+        %td= card.card_type.name
+        %td= card.employee.employee_id if card.employee
+        %td
+          = link_to 'Show', [:admin, card]
+          |
+          = link_to 'Edit', edit_admin_card_path(card)
+          |
+          = link_to 'Destroy', [:admin, card], method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
-= link_to 'New Card', new_card_path
+= link_to 'New Card', new_admin_card_path

@@ -1,0 +1,26 @@
+%h3 Listing employees
+
+%table.table.table-sm.table-hover
+  %thead
+    %tr
+      %th Employee ID
+      %th Mobile Number
+      %th Cards
+      %th Actions
+
+  %tbody
+    - @employees.each do |employee|
+      %tr
+        %td= employee.employee_id
+        %td= employee.mobile_number
+        %td= employee.cards.pluck(:card_number).join(', ')
+        %td
+          = link_to 'Show', [:admin, employee]
+          |
+          = link_to 'Edit', edit_admin_employee_path(employee)
+          |
+          = link_to 'Destroy', [:admin, employee], method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Employee', new_admin_employee_path

@@ -1,7 +1,7 @@
 = form_for [:admin, @merchant_category_code] do |f|
   - if @merchant_category_code.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@merchant_category_code.errors.count, "error")} prohibited this merchant_category_code from being saved:"
+      %h4= "#{pluralize(@merchant_category_code.errors.count, "error")} prohibited this merchant_category_code from being saved:"
       %ul
         - @merchant_category_code.errors.full_messages.each do |message|
           %li= message

@@ -1,0 +1,25 @@
+= form_for [:admin, @employee] do |f|
+  - if @employee.errors.any?
+    #error_explanation
+      %h4= "#{pluralize(@employee.errors.count, "error")} prohibited this employee from being saved:"
+      %ul
+        - @employee.errors.full_messages.each do |message|
+          %li= message
+  .form-group
+    = f.label :email
+    = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control'
+  - if action_name == 'new'
+    .form-group
+      = f.label :password
+      = f.password_field :password, autocomplete: 'current-password', class: 'form-control'
+    .form-group
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control'
+  .form-group
+    = f.label :employee_id, 'Employee ID', class: 'required'
+    = f.text_field :employee_id, class: 'form-control'
+  .form-group
+    = f.label :mobile_number, class: 'required'
+    = f.text_field :mobile_number, class: 'form-control'
+  .actions
+    = f.submit 'Save', class: 'btn btn-primary'
