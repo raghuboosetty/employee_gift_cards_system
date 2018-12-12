@@ -44,15 +44,7 @@ class Admin::TransactionsController < AdminController
 
   def export
     GenerateReportJob.perform_later params.permit(Export::TransactionsExport.keys), current_admin
-
-    # if export_string
-    #   send_data export_string,
-    #             type: 'text/csv; charset=iso-8859-1; header=present',
-    #             disposition: "attachment; filename=Transactions-#{Date.today.to_s(:number)}.csv"
-    # else
-    #   redirect_to admin_transactions_path, alert: @exporter.error
-    # end
-    redirect_back(fallback_location: admin_transactions_path)
+    redirect_back(fallback_location: admin_transactions_path, notice: 'Request is being processed in background, please check your email')
   end
 
   private

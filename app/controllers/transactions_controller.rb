@@ -23,6 +23,11 @@ class TransactionsController < EmployeeDashController
   def show
   end
 
+  def export
+    GenerateReportJob.perform_later params.permit(Export::TransactionsExport.keys), current_employee
+    redirect_back(fallback_location: transactions_path, notice: 'Request is being processed in background, please check your email')
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction

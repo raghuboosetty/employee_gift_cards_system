@@ -26,7 +26,11 @@ Rails.application.routes.draw do
   end
 
   resource :employee, only: :show
-  resources :transactions, only: [:index, :show]
+  resources :transactions, only: [:index, :show] do
+    collection do
+      get :export
+    end
+  end
 
   get 'download_report' => "home#download_report", as: :download_report
   
