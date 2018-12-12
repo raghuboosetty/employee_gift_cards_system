@@ -9,8 +9,8 @@
       %th Card
       %th MCC
       %th Merchant Name
-      %th Amount Considered
-      %th Payment Amount
+      %th Tax Exempted
+      %th Amount
       %th Status
       %th Transaction Time
       %th Actions
@@ -24,8 +24,8 @@
         %td= transaction.card.card_number
         %td= transaction.mcc
         %td= transaction.merchant_name
+        %td= transaction.tax_amount
         %td= transaction.amount
-        %td= transaction.payment_amount
         %td= transaction.status
         %td= transaction.transaction_at.strftime("%d %b %Y %H:%M:%S")
         %td= link_to 'Show', transaction

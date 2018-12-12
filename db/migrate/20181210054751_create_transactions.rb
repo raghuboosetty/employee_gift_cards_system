@@ -7,7 +7,7 @@ class CreateTransactions < ActiveRecord::Migration[5.2]
       t.string :transaction_id, null: false
       t.string :mcc, null: false
       t.string :merchant_name, null: false
-      t.decimal :payment_amount, null: false      
+      t.decimal :tax_amount, null: false      
       t.decimal :amount, null: false
       t.string :status, null: false
       t.datetime :transaction_at, null: false

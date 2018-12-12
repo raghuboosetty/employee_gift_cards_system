@@ -7,7 +7,7 @@
 %p
   = @employee.mobile_number
 %p
-  = @employee.cards.pluck(:card_number).join(', ')
+  = @employee.card.card_number
 
 = link_to 'Edit', edit_admin_employee_path(@employee)
 \|

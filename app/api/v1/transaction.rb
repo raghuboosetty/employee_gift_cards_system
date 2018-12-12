@@ -20,9 +20,7 @@ module V1
           { message: 'Successful' }
         else
           errors = 'Request Denied!'
-          if transaction.error_message.present?
-            errors = transaction.error_message
-          end
+          errors = transaction.error_message if transaction.error_message.present?
           error!(errors, 403)
         end
       end

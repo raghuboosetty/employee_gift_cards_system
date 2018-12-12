@@ -3,13 +3,13 @@ class Card < ApplicationRecord
   belongs_to :card_type
   belongs_to :employee, optional: true
 
-  validates :card_number, presence: true, uniqueness: true
+  validates :card_number, :employee_id, presence: true, uniqueness: true
 
   def pending_limit_in_given_month(merchant_code, timestamp)
     merchant_category_code = card_type.merchant_category_codes.where(code: merchant_code).first
     if merchant_category_code
       default_mcc_monthly_limit = merchant_category_code.limit
-      used_mcc_limit_this_month = transactions.in_month_of(timestamp).successful.where(merchant_category_code_id: merchant_category_code.id).sum(:amount)
+      used_mcc_limit_this_month = transactions.in_month_of(timestamp).successful.where(merchant_category_code_id: merchant_category_code.id).sum(:tax_amount)
       (default_mcc_monthly_limit - used_mcc_limit_this_month).to_f
     else
       -1 # when MCC is not in given card
@@ -42,11 +42,11 @@ class Card < ApplicationRecord
     end
 
     if pending_limit > attrs[:amount]
-      transaction.amount = attrs[:amount]
+      transaction.tax_amount = attrs[:amount]
     elsif pending_limit < 0
-      transaction.amount = 0
+      transaction.tax_amount = 0
     else
-      transaction.amount = pending_limit
+      transaction.tax_amount = pending_limit
     end
 
     transaction.employee_id = self.employee_id
@@ -56,7 +56,7 @@ class Card < ApplicationRecord
     transaction.mcc = attrs[:merchant_code]
     transaction.transaction_id = attrs[:id]
     transaction.merchant_name = attrs[:merchant_name]
-    transaction.payment_amount = attrs[:amount]
+    transaction.amount = attrs[:amount]
 
     if pending_limit.zero?
       transaction.error_message = Transaction::ERROR_MESSAGES[:mcc_not_allowed]
@@ -95,5 +95,5 @@ end
 # Indexes
 #
 #  index_cards_on_card_type_id  (card_type_id)
-#  index_cards_on_employee_id   (employee_id)
+#  index_cards_on_employee_id   (employee_id) UNIQUE
 #

@@ -15,7 +15,7 @@
         %td= employee.employee_id
         %td= employee.email
         %td= employee.mobile_number
-        %td= employee.cards.pluck(:card_number).join(', ')
+        %td= employee.card.card_number
         %td
           = link_to 'Show', [:admin, employee]
           |

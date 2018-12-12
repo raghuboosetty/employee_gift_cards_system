@@ -1,14 +1,14 @@
 class Transaction < ApplicationRecord
+  default_scope { order(transaction_at: :desc) }
+
   belongs_to :employee
   belongs_to :card
   belongs_to :merchant_category_code, optional: true
 
-  # before_save :status_update
-
   PAYMENT_STATUSES = { success: 'SUCCESS', denied: 'DENIED' }
   ERROR_MESSAGES = { 
     limit_reached: 'Monthly Limit Reached',
-    mcc_not_allowed: 'Merchant Code is not allowed'
+    mcc_not_allowed: 'Merchant Code Not Allowed'
    } 
 
   validates :transaction_id, :merchant_name, :amount, :status, :transaction_at, presence: true
@@ -36,7 +36,7 @@ end
 #  transaction_id            :string           not null
 #  mcc                       :string           not null
 #  merchant_name             :string           not null
-#  payment_amount            :decimal(, )      not null
+#  tax_amount                :decimal(, )      not null
 #  amount                    :decimal(, )      not null
 #  status                    :string           not null
 #  transaction_at            :datetime         not null
