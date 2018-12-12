@@ -10,8 +10,11 @@
   %b Card Number 
   = @transaction.card.card_number
 %p
+  %b Card Type
+  = @transaction.card.card_type.name
+%p
   %b MCC
-  = @transaction.merchant_category_code.code
+  = @transaction.mcc
 %p
   %b Merchant Name
   = @transaction.merchant_name
@@ -19,7 +22,15 @@
   %b Amount
   = @transaction.amount
 %p
+  %b Payment Amount
+  = @transaction.payment_amount 
+%p
   %b Status
   = @transaction.status  
+
+- if @transaction.error_message
+  %p
+    %b Error Message
+    = @transaction.error_message
 
 = link_to 'Back', transactions_path

@@ -42,14 +42,23 @@ end
   Card.create(card)
 end
 
-cards = Card.first(2)
-employees = Employee.first(2)
-merchant_category_codes = MerchantCategoryCode.pluck(:code, :id).to_h
+
+def transaction_id
+  SecureRandom.alphanumeric(30)
+end
+
 [
-  { employee_id: employees[0].id, card_id: cards[0].id, merchant_category_code_id: merchant_category_codes['FDG'], transaction_id: SecureRandom.alphanumeric(30), merchant_name: 'Swiggy', amount: 187.0, status: 'Success' },
-  { employee_id: employees[0].id, card_id: cards[0].id, merchant_category_code_id: merchant_category_codes['MED'], transaction_id: SecureRandom.alphanumeric(30), merchant_name: 'Apollo', amount: 105.0, status: 'Denied' },
-  { employee_id: employees[1].id, card_id: cards[1].id, merchant_category_code_id: merchant_category_codes['MED'], transaction_id: SecureRandom.alphanumeric(30), merchant_name: 'Swiggy', amount: 1005.0, status: 'Success' },
-  { employee_id: employees[1].id, card_id: cards[1].id, merchant_category_code_id: merchant_category_codes['MED'], transaction_id: SecureRandom.alphanumeric(30), merchant_name: 'Apollo', amount: 1200.0, status: 'Success' }
-].each do |transaction|
-  Transaction.create(transaction)
+  { merchant_code: 'FDG', merchant_name: 'Swiggy', amount: 187.0 },
+  { merchant_code: 'FDG', merchant_name: 'Swiggy', amount: 105.0 },
+  { merchant_code: 'MED', merchant_name: 'Apollo', amount: 1000.0 },
+  { merchant_code: 'FUL', merchant_name: 'Indian Oil', amount: 500.0 },
+  { merchant_code: 'FDG', merchant_name: 'Swiggy', amount: 187.0, created: (Time.now.last_month - 2.days).to_i },
+  { merchant_code: 'FDG', merchant_name: 'Swiggy', amount: 105.0, created: (Time.now.last_month - 5.days).to_i },
+  { merchant_code: 'MED', merchant_name: 'Apollo', amount: 1000.0, created: (Time.now.last_year - 20.days).to_i },
+  { merchant_code: 'FUL', merchant_name: 'Indian Oil', amount: 500.0, created: (Time.now.last_year - 7.days).to_i }
+].each do |params|
+  Card.all.each do |card|
+    txn = card.create_transaction(params.merge({id: transaction_id}))
+    puts "#{card.card_type.name} - #{txn.error_message}"
+  end
 end

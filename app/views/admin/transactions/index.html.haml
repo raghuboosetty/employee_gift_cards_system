@@ -9,7 +9,8 @@
       %th Card
       %th MCC
       %th Merchant Name
-      %th Amount
+      %th Amount Considered
+      %th Payment Amount
       %th Status
       %th Transaction Time
       %th Actions
@@ -21,11 +22,12 @@
         %td= transaction.employee.employee_id
         %td= transaction.card.card_type.name
         %td= transaction.card.card_number
-        %td= transaction.merchant_category_code.code
+        %td= transaction.mcc
         %td= transaction.merchant_name
         %td= transaction.amount
+        %td= transaction.payment_amount
         %td= transaction.status
-        %td= transaction.created_at.strftime("%d %b %Y %H:%M:%S")
+        %td= transaction.transaction_at.strftime("%d %b %Y %H:%M:%S")
         %td
           = link_to 'Show', [:admin, transaction]
           |

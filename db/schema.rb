@@ -74,10 +74,14 @@ ActiveRecord::Schema.define(version: 2018_12_10_054751) do
     t.integer "employee_id"
     t.integer "card_id"
     t.integer "merchant_category_code_id"
-    t.string "transaction_id"
-    t.string "merchant_name"
-    t.decimal "amount"
-    t.string "status"
+    t.string "transaction_id", null: false
+    t.string "mcc", null: false
+    t.string "merchant_name", null: false
+    t.decimal "payment_amount", null: false
+    t.decimal "amount", null: false
+    t.string "status", null: false
+    t.datetime "transaction_at", null: false
+    t.string "error_message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_transactions_on_card_id"

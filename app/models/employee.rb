@@ -9,6 +9,15 @@ class Employee < ApplicationRecord
 
   validates :employee_id, presence: true, uniqueness: true
   validates :mobile_number, uniqueness: true
+
+
+  def transaction_allowed?
+
+  end
+
+  def monthly_allowences
+    
+  end
 end
 
 # == Schema Information
