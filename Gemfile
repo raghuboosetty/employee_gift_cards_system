@@ -59,6 +59,7 @@ gem 'grape-active_model_serializers'
 gem 'grape_on_rails_routes'
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
+gem 'grape-entity'
 gem 'httpclient'
 
 group :development, :test do

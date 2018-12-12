@@ -12,7 +12,7 @@ class Employee < ApplicationRecord
 
   class << self
     def select_options
-      self.pluck(:email, :id).unshift(['All', nil])
+      self.pluck(:employee_id, :id).unshift(['All', nil])
     end
   end
 end
