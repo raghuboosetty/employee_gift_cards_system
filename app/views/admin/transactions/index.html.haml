@@ -2,6 +2,9 @@
   Listing Transactions: #{@transactions_count}
 
 = render 'shared/transactions/filters', path: admin_transactions_path
+
+= link_to 'Export', export_admin_transactions_path(params.permit(Export::TransactionsExport.keys))
+
 %br
 - if params[:group_by].present?
   - @transactions.each do |month, transactions|
