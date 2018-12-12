@@ -1,5 +1,9 @@
-%h3 Listing Transactions
+%h3 
+  Listing Transactions: #{@transactions.count}
 
+= render 'shared/transactions_filter', path: admin_transactions_path
+
+%br
 %table.table.table-sm.table-hover.table-striped.table-striped
   %thead
     %tr
@@ -27,7 +31,7 @@
         %td= transaction.tax_amount
         %td= transaction.amount
         %td= transaction.status
-        %td= transaction.transaction_at.strftime("%d %b %Y %H:%M:%S")
+        %td= transaction.transaction_at.to_s(:human_with_12hours)
         %td
           = link_to 'Show', [:admin, transaction]
           |

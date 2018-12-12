@@ -3,6 +3,12 @@ class CardType < ApplicationRecord
   has_and_belongs_to_many :merchant_category_codes, -> { distinct }
 
   validates :name, presence: true, uniqueness: true
+
+  class << self
+    def select_options
+      self.pluck(:name, :id).unshift(["All", nil])
+    end
+  end
 end
 
 # == Schema Information

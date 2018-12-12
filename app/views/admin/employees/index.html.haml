@@ -17,6 +17,8 @@
         %td= employee.mobile_number
         %td= employee.card.card_number
         %td
+          = link_to 'Transactions', admin_employee_transactions_path(employee)
+          |
           = link_to 'Show', [:admin, employee]
           |
           = link_to 'Edit', edit_admin_employee_path(employee)

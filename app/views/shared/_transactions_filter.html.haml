@@ -1,0 +1,12 @@
+= form_tag path, method: :get, id: "filter_project" do
+  .row
+    .col-md-2.col-xs-12
+      %b Duration
+      = select_tag(:duration, options_for_select(FormDateRange.select_options, selected: params[:duration]), class: "form-control input-sm", onchange: "this.form.submit();")
+    - if current_admin && path.include?('admin')
+      .col-md-2.col-xs-12
+        %b Employee
+        = select_tag(:employee_id, options_for_select(Employee.select_options, selected: params[:employee_id]), class: "form-control input-sm", onchange: "this.form.submit();")      
+      .col-md-2.col-xs-12
+        %b Card Type
+        = select_tag(:card_type_id, options_for_select(CardType.select_options, selected: params[:card_type_id]), class: "form-control input-sm", onchange: "this.form.submit();")

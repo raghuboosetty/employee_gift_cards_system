@@ -1,10 +1,24 @@
 class Admin::TransactionsController < AdminController
+  before_action :set_employee
   before_action :set_transaction, only: [:show, :destroy]
 
   # GET /admin/transactions
   # GET /admin/transactions.json
   def index
-    @transactions = Transaction.all
+    @transactions = if @employee
+      @employee.transactions
+    else
+      Transaction.all
+    end
+
+    if params[:card_type_id].present?
+      @transactions = @transactions.joins(card: :card_type).where("card_types.id IN (?)", params[:card_type_id])
+    end
+
+    date_range = FormDateRange.new(params[:duration])
+    if date_range.present?
+      @transactions = @transactions.where(transaction_at: date_range.time_range)
+    end
   end
 
   # GET /admin/transactions/1
@@ -24,6 +38,10 @@ class Admin::TransactionsController < AdminController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_employee
+      @employee = Employee.find(params[:employee_id]) if params[:employee_id].present?
+    end
+
     def set_transaction
       @transaction = Transaction.find(params[:id])
     end

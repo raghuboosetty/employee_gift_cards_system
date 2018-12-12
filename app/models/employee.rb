@@ -9,6 +9,12 @@ class Employee < ApplicationRecord
 
   validates :employee_id, presence: true, uniqueness: true
   validates :mobile_number, uniqueness: true
+
+  class << self
+    def select_options
+      self.pluck(:email, :id).unshift(['All', nil])
+    end
+  end
 end
 
 # == Schema Information

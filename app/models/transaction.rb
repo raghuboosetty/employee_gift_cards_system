@@ -22,7 +22,6 @@ class Transaction < ApplicationRecord
   def successful?
     status == Transaction::PAYMENT_STATUSES[:success]
   end
-  
 end
 
 # == Schema Information

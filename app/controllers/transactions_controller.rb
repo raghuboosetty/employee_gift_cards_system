@@ -5,6 +5,11 @@ class TransactionsController < EmployeeDashController
   # GET /transactions.json
   def index
     @transactions = current_employee.transactions
+    
+    date_range = FormDateRange.new(params[:duration])
+    if date_range.present?
+      @transactions = @transactions.where(transaction_at: date_range.time_range)
+    end
   end
 
   # GET /transactions/1
