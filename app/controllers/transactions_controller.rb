@@ -10,6 +10,12 @@ class TransactionsController < EmployeeDashController
     if date_range.present?
       @transactions = @transactions.where(transaction_at: date_range.time_range)
     end
+
+    @transactions_count = @transactions.count
+
+    if params[:group_by].present?
+      @transactions = @transactions.group_by { |m| m.transaction_at.beginning_of_month }
+    end
   end
 
   # GET /transactions/1

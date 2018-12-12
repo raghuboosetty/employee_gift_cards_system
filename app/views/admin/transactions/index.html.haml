@@ -1,38 +1,11 @@
 %h3 
-  Listing Transactions: #{@transactions.count}
+  Listing Transactions: #{@transactions_count}
 
-= render 'shared/transactions_filter', path: admin_transactions_path
-
+= render 'shared/transactions/filters', path: admin_transactions_path
 %br
-%table.table.table-sm.table-hover.table-striped.table-striped
-  %thead
-    %tr
-      %th Transaction ID
-      %th Employee
-      %th Card Type
-      %th Card
-      %th MCC
-      %th Merchant Name
-      %th Tax Exempted
-      %th Amount
-      %th Status
-      %th Transaction Time
-      %th Actions
-
-  %tbody
-    - @transactions.each do |transaction|
-      %tr
-        %td= transaction.transaction_id
-        %td= transaction.employee.employee_id
-        %td= transaction.card.card_type.name
-        %td= transaction.card.card_number
-        %td= transaction.mcc
-        %td= transaction.merchant_name
-        %td= transaction.tax_amount
-        %td= transaction.amount
-        %td= transaction.status
-        %td= transaction.transaction_at.to_s(:human_with_12hours)
-        %td
-          = link_to 'Show', [:admin, transaction]
-          |
-          = link_to 'Destroy', [:admin, transaction], method: :delete, data: { confirm: 'Are you sure?' }
+- if params[:group_by].present?
+  - @transactions.each do |month, transactions|
+    %b= month.to_s(:month_and_year)
+    = render 'shared/transactions/index', transactions: transactions, path: :admin
+- else
+  = render 'shared/transactions/index', transactions: @transactions, path: :admin

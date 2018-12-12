@@ -1,0 +1,37 @@
+%table.table.table-sm.table-hover.table-striped.table-striped
+  %thead
+    %tr
+      %th Employee ID
+      %th Mobile Number
+      - if path == :admin
+        %th Card Type
+      %th Card Number
+      %th Transaction Time
+      - if path == :admin
+        %th MCC
+      %th Merchant Name
+      %th Transaction Amount
+      %th Tax Exempted
+      %th Transaction Status
+      %th Actions
+
+  %tbody
+    - transactions.each do |transaction|
+      %tr        
+        %td= transaction.employee.employee_id
+        %td= transaction.employee.mobile_number
+        - if path == :admin
+          %td= transaction.card.card_type.name
+        %td= transaction.card.card_number
+        %td= transaction.transaction_at.to_s(:human_with_12hours)
+        - if path == :admin
+          %td= transaction.mcc
+        %td= transaction.merchant_name
+        %td= transaction.amount
+        %td= transaction.tax_amount
+        %td= transaction.status
+        %td
+          = link_to 'Show', [path, transaction].reject(&:nil?)
+          - if path == :admin
+            |
+            = link_to 'Destroy', [path, transaction].reject(&:nil?), method: :delete, data: { confirm: 'Are you sure?' }
