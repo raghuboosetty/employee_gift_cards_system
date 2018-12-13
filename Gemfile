@@ -83,6 +83,9 @@ group :development do
 
   # Annotate Rails classes with schema and routes info    
   gem 'annotate'
+
+  # Entity-Relationship Diagrams
+  gem 'rails-erd'
 end
 
 group :test do
